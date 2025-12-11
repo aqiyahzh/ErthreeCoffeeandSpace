@@ -2,6 +2,9 @@
 
 @section('content')
 
+<!-- PAKSA LOAD CSS YANG SAMA DENGAN TESTIMONI -->
+<link href="css/style.min.css" rel="stylesheet">
+
 <!-- Tambah CSS yang mirip gaya Testimoni agar styling muncul -->
 <style>
     /* Section Title */
@@ -38,6 +41,7 @@
         box-shadow: 0 6px 16px rgba(0,0,0,0.1);
         overflow: hidden;
         transition: .25s ease;
+        background: #fff;
     }
 
     .team-card:hover {
@@ -93,7 +97,7 @@
 
             <div class="col-lg-4 py-0 py-lg-5">
                 <h1 class="mb-3" style="color:#1f3c88; font-weight:800;">Cerita Kami</h1>
-                <p>Brand ini bermula pada Agustus 2023... </p>
+                <p>Brand ini bermula pada Agustus 2023, dari keinginan sederhana untuk menghadirkan kopi Indonesia dengan kualitas yang bisa dibanggakan. Sejak hari pertama, kami memilih untuk menggunakan biji kopi specialty grade, karena kami percaya bahwa kopi terbaik layak diperkenalkan apa adanya dengan rasa yang jernih, konsisten, dan menggambarkan potensi kopi Indonesia yang sesungguhnya.</p>
                 <a href="{{ route('about') }}" class="btn btn-secondary font-weight-bold py-2 px-4 mt-2">
                     Selengkapnya
                 </a>
@@ -108,10 +112,10 @@
 
             <div class="col-lg-4 py-0 py-lg-5">
                 <h1 class="mb-3" style="color:#1f3c88; font-weight:800;">Visi dan Misi Kami</h1>
-                <p>Menjadi brand kopi yang dikenal...</p>
+                <p>Menjadi brand kopi yang dikenal karena kualitas produk, inovasi yang berkelanjutan, dan hospitality yang tulus, serta mampu memperkenalkan potensi terbaik kopi Indonesia kepada lebih banyak orang.</p>
 
-                <h6 class="mb-3"><i class="fa fa-check text-primary mr-3"></i>Menggunakan biji kopi specialty grade.</h6>
-                <h6 class="mb-3"><i class="fa fa-check text-primary mr-3"></i>Pelayanan ramah dan konsisten.</h6>
+                <h6 class="mb-3"><i class="fa fa-check text-primary mr-3"></i>Menggunakan biji kopi specialty grade untuk menghadirkan rasa dan pengalaman terbaik dari kopi Indonesia.</h6>
+                <h6 class="mb-3"><i class="fa fa-check text-primary mr-3"></i>Membangun hubungan yang hangat dan berkelanjutan dengan setiap konsumen melalui pelayanan yang ramah dan konsisten.</h6>
 
                 <a href="{{ route('about') }}" class="btn btn-secondary font-weight-bold py-2 px-4 mt-2">
                     Selengkapnya

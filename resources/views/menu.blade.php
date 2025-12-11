@@ -2,6 +2,9 @@
 
 @section('content')
 
+<!-- PAKSA LOAD CSS YANG SAMA DENGAN TESTIMONI -->
+<link href="css/style.min.css" rel="stylesheet">
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- Page Header Start -->
@@ -63,68 +66,60 @@
     </div>
 </div>
 
-
 <style>
     .delivery-card {
         border: none;
         border-radius: 14px;
         background: #ffffff;
-        /* putih */
         transition: 0.3s ease;
         border-left: 6px solid #3f6fd1;
-        /* biru utama lembut */
         box-shadow: 0 4px 10px rgba(63, 111, 209, 0.12);
-        /* bayangan biru tipis */
     }
 
     .delivery-card:hover {
         transform: translateY(-6px);
         background: #f3f7ff;
-        /* putih kebiruan saat hover */
         box-shadow: 0 12px 20px rgba(63, 111, 209, 0.20);
-        /* bayangan biru lebih kuat */
     }
 </style>
-
-
 
 <!-- Menu Section Start -->
 <div class="container py-5">
 
     @php
-    $grouped = $menus->groupBy(fn($m) => $m->category ? $m->category->name : 'Uncategorized');
+        $grouped = $menus->groupBy(fn($m) => $m->category ? $m->category->name : 'Uncategorized');
     @endphp
 
     @foreach($grouped as $categoryName => $items)
 
-    <!-- Judul Kategori -->
-    <h1 class="fw-bold mb-5" style="color:#1f3c88;">
-        {{ $categoryName }}
-    </h1>
+        <!-- Judul Kategori -->
+        <h1 class="fw-bold mb-5" style="color:#1f3c88;">
+            {{ $categoryName }}
+        </h1>
 
-    <div class="row">
+        <div class="row">
 
-        @foreach($items as $item)
-        <div class="col-lg-6 mb-5">
+            @foreach($items as $item)
+            <div class="col-lg-6 mb-5">
 
-            <div class="d-flex align-items-start">
+                <div class="d-flex align-items-start">
 
-                <!-- FOTO + HARGA -->
-                <div class="position-relative" style="width:110px; height:110px;">
+                    <!-- FOTO + HARGA -->
+                    <div class="position-relative" style="width:110px; height:110px;">
 
-                    @if($item->image)
-                    <img src="/uploads/menu/{{ $item->image }}"
-                        class="rounded-circle"
-                        style="width:110px; height:110px; object-fit:cover;">
-                    @else
-                    <img src="/img/menu-1.png"
-                        class="rounded-circle"
-                        style="width:110px; height:110px; object-fit:cover;">
-                    @endif
+                        @if($item->image)
+                        <img src="/uploads/menu/{{ $item->image }}"
+                            class="rounded-circle"
+                            style="width:110px; height:110px; object-fit:cover;">
+                        @else
+                        <img src="/img/menu-1.png"
+                            class="rounded-circle"
+                            style="width:110px; height:110px; object-fit:cover;">
+                        @endif
 
-                    <!-- HARGA BULAT -->
-                    <span class="position-absolute"
-                        style="
+                        <!-- HARGA BULAT -->
+                        <span class="position-absolute"
+                            style="
                                 top:-6px;
                                 right:-6px;
                                 background:#1f3c88;
@@ -138,27 +133,27 @@
                                 font-weight:bold;
                                 font-size:14px;
                             ">
-                        {{ $item->price }}
-                    </span>
-                </div>
+                            {{ $item->price }}
+                        </span>
+                    </div>
 
-                <!-- TEKS (JARAK FIX 30PX) -->
-                <div style="margin-left: 30px; max-width: 350px;">
-                    <h4 class="fw-bold mb-1" style="color:#1f3c88; font-size:22px;">
-                        {{ $item->name }}
-                    </h4>
+                    <!-- TEKS (JARAK FIX 30PX) -->
+                    <div style="margin-left: 30px; max-width: 350px;">
+                        <h4 class="fw-bold mb-1" style="color:#1f3c88; font-size:22px;">
+                            {{ $item->name }}
+                        </h4>
 
-                    <p class="m-0 text-muted" style="font-size:15px; line-height:1.55;">
-                        {{ $item->description ?? 'Tidak ada deskripsi.' }}
-                    </p>
+                        <p class="m-0 text-muted" style="font-size:15px; line-height:1.55;">
+                            {{ $item->description ?? 'Tidak ada deskripsi.' }}
+                        </p>
+                    </div>
+
                 </div>
 
             </div>
+            @endforeach
 
         </div>
-        @endforeach
-
-    </div>
 
     @endforeach
 
@@ -185,7 +180,6 @@
         align-items: center;
         justify-content: center;
         background-color: #1f3c88;
-        /* biru utama */
         color: #fff;
         font-weight: 700;
         padding: 0.6rem 1.8rem;
@@ -199,20 +193,10 @@
 
     .book-menu-btn:hover {
         background-color: #2f4fa8;
-        /* biru hover lebih terang */
         color: #fff;
         text-decoration: none;
     }
 
-    /* Mobile full width */
-    @media (max-width: 576px) {
-        .book-menu-btn {
-            width: 100%;
-        }
-    }
-
-
-    /* Mobile full width */
     @media (max-width: 576px) {
         .book-menu-btn {
             width: 100%;
