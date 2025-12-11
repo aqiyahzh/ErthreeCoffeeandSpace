@@ -18,25 +18,25 @@ class ReservationController extends Controller
         // Cek apakah hari ini ruangan sudah dibooking (pending/confirmed)
         $booked = [
             'vip' => Reservation::where('room_type', 'vip')
-                        ->whereDate('date', $today)
-                        ->whereIn('status', ['pending','confirmed'])
-                        ->exists(),
+                ->whereDate('date', $today)
+                ->whereIn('status', ['pending', 'confirmed'])
+                ->exists(),
 
             'workspace' => Reservation::where('room_type', 'workspace')
-                        ->whereDate('date', $today)
-                        ->whereIn('status', ['pending','confirmed'])
-                        ->exists(),
+                ->whereDate('date', $today)
+                ->whereIn('status', ['pending', 'confirmed'])
+                ->exists(),
 
             'karaoke' => Reservation::where('room_type', 'karaoke')
-                        ->whereDate('date', $today)
-                        ->whereIn('status', ['pending','confirmed'])
-                        ->exists(),
+                ->whereDate('date', $today)
+                ->whereIn('status', ['pending', 'confirmed'])
+                ->exists(),
         ];
 
         // Jika kamu ingin menampilkan halaman dengan $page (opsional)
-        $page = \App\Models\Page::whereIn('slug', ['reservation','reservasi'])->first();
+        $page = \App\Models\Page::whereIn('slug', ['reservation', 'reservasi'])->first();
 
-        return view('reservation', compact('booked','page'));
+        return view('reservation', compact('booked', 'page'));
     }
 
     /**
@@ -56,36 +56,29 @@ class ReservationController extends Controller
         ]);
 
         // Buat waktu mulai & selesai
-        $start = Carbon::createFromFormat('Y-m-d H:i', $data['date'].' '.$data['time']);
-        $end = (clone $start)->addMinutes($data['duration']);
+        $start = Carbon::createFromFormat('Y-m-d H:i', $data['date'] . ' ' . $data['time']);
+        $end   = (clone $start)->addMinutes($data['duration']);
 
-        // Cek bentrok dengan reservation lain
+        // Cek bentrok dengan reservasi lain
         $conflict = Reservation::where('room_type', $data['room_type'])
-            ->whereIn('status', ['pending','confirmed'])
+            ->whereIn('status', ['pending', 'confirmed']) // <– PENTING: pending + confirmed
             ->whereDate('date', $data['date'])
-            ->where(function($q) use ($start, $end) {
-                $q->where(function($qq) use ($start, $end) {
+            ->where(function ($q) use ($start, $end) {
+                $q->where(function ($qq) use ($start, $end) {
+                    // kalau waktu saling overlap
                     $qq->where('time', '<', $end->format('H:i:s'))
-                       ->where('end_time', '>', $start->format('H:i:s'));
+                        ->where('end_time', '>', $start->format('H:i:s'));
                 });
             })
             ->exists();
 
-        // Jika bentrok -> rejected
+        // Jika bentrok -> cukup kirim error, TIDAK usah simpan ke DB
         if ($conflict) {
-            $data['status'] = 'rejected';
-
-            Reservation::create(array_merge($data, [
-                'end_time'   => $end->format('H:i:s'),
-                'wa_message' => null,
-                'wa_sent'    => false,
-            ]));
-
             return redirect()->route('reservation')
                 ->with('error', 'Maaf, waktu yang Anda pilih bentrok dengan reservasi lain. Mohon pilih waktu lain.');
         }
 
-        // Jika tidak bentrok -> pending
+        // Kalau tidak bentrok -> pending
         $data['status'] = 'pending';
         $reservation = Reservation::create(array_merge($data, [
             'end_time' => $end->format('H:i:s'),
@@ -93,12 +86,12 @@ class ReservationController extends Controller
 
         // Buat pesan WA otomatis
         $waMessage =
-            "Halo, saya ingin konfirmasi reservasi:\n".
-            "Nama: {$reservation->name}\n".
-            "Ruangan: ".strtoupper($reservation->room_type)."\n".
-            "Tanggal: ".$reservation->date->format('Y-m-d')."\n".
-            "Waktu: {$reservation->time}\n".
-            "Durasi: {$reservation->duration} menit\n".
+            "Halo, saya ingin konfirmasi reservasi:\n" .
+            "Nama: {$reservation->name}\n" .
+            "Ruangan: " . strtoupper($reservation->room_type) . "\n" .
+            "Tanggal: " . $reservation->date->format('Y-m-d') . "\n" .
+            "Waktu: {$reservation->time}\n" .
+            "Durasi: {$reservation->duration} menit\n" .
             "Detail: {$reservation->person_detail}\n";
 
         $reservation->update([

@@ -11,203 +11,296 @@
         <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">{{ $page->title ?? 'Reservasi' }}</h1>
         <div class="d-inline-flex mb-lg-5">
             @if(!empty($page->excerpt))
-                <p class="text-white text-center mb-0">{{ $page->excerpt }}</p>
+            <p class="text-white text-center mb-0">{{ $page->excerpt }}</p>
             @endif
         </div>
     </div>
-</div>  
+</div>
 <!-- Page Header End -->
 
 <style>
-/* =========================== */
-/* CARD FORM – clean & modern  */
-/* =========================== */
-.reservation-card {
-    width: 100%;
-    max-width: 950px;
-    margin: 0 auto;
-    border-radius: 14px;
-    padding: 25px 40px !important;
-    background: #e0e1e2ff;
-    border: 1px solid #dfe7ff;
-    box-shadow: 0 8px 18px rgba(0,0,0,0.08);
-}
+    /* =========================== */
+    /* CARD FORM – compact layout  */
+    /* =========================== */
+    .reservation-card {
+        width: 100%;
+        max-width: 1100px;
+        /* diperlebar */
+        margin: 0 auto;
+        border-radius: 14px;
+        padding: 18px 28px !important;
+        /* padding dikurangi */
+        background: #e0e1e2ff;
+        border: 1px solid #dfe7ff;
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+    }
 
-/* FORM INPUT LEBIH RAPI */
-.form-control-lg {
-    padding: 12px 14px !important;
-    font-size: 1rem !important;
-    border-radius: 10px;
-}
+    /* FORM INPUT LEBIH RAPI & KECIL */
+    .form-control-lg {
+        padding: 8px 10px !important;
+        font-size: 0.9rem !important;
+        /* text input mengecil */
+        border-radius: 8px;
+    }
 
-/* Hilangkan ruang berlebih antar input */
-.mb-3, .mb-4 {
-    margin-bottom: 14px !important;
-}
+    .form-label {
+        font-size: 0.9rem;
+        /* label mengecil */
+        margin-bottom: 4px;
+    }
 
-/* Checkbox kecil */
-.form-check-input {
-    transform: scale(0.88);
-    margin-top: 4px;
-}
+    /* Hilangkan ruang berlebih antar input */
+    .mb-3,
+    .mb-4 {
+        margin-bottom: 10px !important;
+    }
 
-/* Judul form */
-.card-title {
-    font-size: 26px;
-    font-weight: 700;
-    color: #1a2b6d;
-}
+    /* Checkbox kecil */
+    .form-check-input {
+        transform: scale(0.82);
+        margin-top: 3px;
+    }
 
-/* Button kembali normal */
-.erth-btn-primary {
-    background: #162fb9ff !important;
-    color: white !important;
-    border-radius: 10px;
-    padding: 12px 18px;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: 0.2s;
-}
+    /* Judul form */
+    .card-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: #1a2b6d;
+    }
 
-.erth-btn-primary:hover {
-    background: #001fad !important;
-}
+    /* Button */
+    .erth-btn-primary {
+        background: #162fb9ff !important;
+        color: white !important;
+        border-radius: 10px;
+        padding: 10px 16px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        transition: 0.2s;
+    }
 
-/* Biar form tidak terlalu tinggi */
-.card-body {
-    padding: 32px !important;
-}
+    .erth-btn-primary:hover {
+        background: #001fad !important;
+    }
 
-/* FORM FULL WIDTH */
-.col-lg-6 {
-    max-width: 950px !important;
-}
+    /* Biar form tidak terlalu tinggi */
+    .card-body {
+        padding: 20px 18px !important;
+    }
 
-/* Required star */
-.required-star {
-    color: red;
-    font-weight: bold;
-}
+    /* FORM FULL WIDTH */
+    .col-lg-6 {
+        max-width: 1100px !important;
+        /* ikut dilebarin */
+    }
 
-/* ========================================== */
-/*      MODAL / POPUP RAPI & ELEGAN           */
-/* ========================================== */
-.modal-custom {
-    border-radius: 18px;
-    border: none;
-    overflow: hidden;
-    background: #ffffff !important;
-    box-shadow: 0px 10px 30px rgba(0,0,0,0.25);
-}
 
-.modal-custom-header {
-    background: #1a3cff;
-    color: #fff;
-    padding: 18px 25px;
-    font-size: 20px;
-    font-weight: 700;
-}
+    /* Required star */
+    .required-star {
+        color: red;
+        font-weight: bold;
+    }
 
-.modal-body {
-    padding: 25px 30px !important;
-}
+    /* ================================ */
+    /*   MODAL POPUP (SUKSES & ERROR)   */
+    /* ================================ */
+    .reservation-modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.55);
+        /* gelap di belakang */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2050;
+    }
 
-/* Input di modal */
-.modal-body .form-control {
-    border-radius: 10px;
-    padding: 10px 12px;
-}
+    .reservation-modal {
+        background: #ffffff;
+        border-radius: 18px;
+        padding: 22px 26px 18px;
+        width: min(420px, 90%);
+        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+        position: relative;
+        animation: popIn 0.25s ease-out;
+    }
 
-/* Button modal */
-.modal-body .btn {
-    padding: 12px;
-    border-radius: 10px;
-    font-size: 1rem;
-    font-weight: 700;
-}
+    .reservation-modal-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 8px;
+    }
 
-/* ================================ */
-/*    RESERVATION SUCCESS ALERT     */
-/* ================================ */
-.reservation-alert {
-    background: #e8f9ee;
-    border: 1px solid #b6e8c5;
-    padding: 14px 22px;
-    border-radius: 12px;
-    max-width: 700px;
-    margin: 20px auto 40px auto;
-    font-size: 15px;
-    color: #1a3b23;
-    font-weight: 500;
-    display: flex;
-    gap: 15px;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
-    animation: fadeIn 0.4s ease;
-}
+    .reservation-modal-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+    }
 
-/* WA BUTTON */
-.wa-btn {
-    background: #0066ff;
-    color: white;
-    padding: 10px 18px;
-    border-radius: 10px;
-    text-decoration: none !important;
-    font-size: 14px;
-    font-weight: 600;
-    white-space: nowrap;
-    transition: 0.25s;
-}
+    .reservation-modal-icon.success {
+        background: #dcfce7;
+        color: #16a34a;
+    }
 
-.wa-btn:hover {
-    background: #0049c9;
-}
+    .reservation-modal-icon.error {
+        background: #fee2e2;
+        color: #b91c1c;
+    }
 
-/* Fade-in animation */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-6px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+    .reservation-modal-title {
+        font-weight: 700;
+        font-size: 16px;
+    }
 
+    .reservation-modal-body {
+        font-size: 14px;
+        color: #4b5563;
+        margin-bottom: 14px;
+    }
+
+    .reservation-modal-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 4px;
+    }
+
+    .reservation-modal-close {
+        position: absolute;
+        top: 8px;
+        right: 10px;
+        border: none;
+        background: transparent;
+        font-size: 20px;
+        line-height: 1;
+        cursor: pointer;
+    }
+
+    /* Tombol WA di popup */
+    .wa-btn {
+        background: #0066ff;
+        color: white;
+        padding: 8px 14px;
+        border-radius: 8px;
+        text-decoration: none !important;
+        font-size: 13px;
+        font-weight: 600;
+        display: inline-block;
+        text-align: center;
+        transition: 0.25s;
+    }
+
+    .wa-btn:hover {
+        background: #0049c9;
+    }
+
+    /* Animasi muncul */
+    @keyframes popIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px) scale(0.96);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
 </style>
 
 
 
 <div class="container-fluid py-5">
     <div class="container">
-        
+
         @if(session('success'))
-            <div class="reservation-alert">
-                <div class="reservation-text">
+        <div class="reservation-modal-overlay" id="reservation-success-modal">
+            <div class="reservation-modal">
+                <button type="button" class="reservation-modal-close"
+                    onclick="closeReservationModal('reservation-success-modal')">
+                    ×
+                </button>
+
+                <div class="reservation-modal-header">
+                    <div class="reservation-modal-icon success">✓</div>
+                    <div class="reservation-modal-title">
+                        Reservasi Berhasil
+                    </div>
+                </div>
+
+                <div class="reservation-modal-body">
                     {{ session('success') }}
                 </div>
 
                 @php
-                    $waData = session('reservation_wa');
+                $waData = session('reservation_wa');
                 @endphp
 
-                @if(!empty($waData))
+                <div class="reservation-modal-actions">
+                    @if(!empty($waData))
                     @php
-                        $waNumber = '6281216615085';
-                        $waText = "Halo, saya ingin konfirmasi reservasi:%0A"
-                            . "Nama: {$waData['name']}%0A"
-                            . "Ruangan: " . strtoupper($waData['room_type']) . "%0A"
-                            . "Tanggal: {$waData['date']}%0A"
-                            . "Waktu: {$waData['time']}%0A"
-                            . "Detail: {$waData['person_detail']}";
+                    $waNumber = '6281216615085';
+                    $waText = "Halo, saya ingin konfirmasi reservasi:%0A"
+                    . "Nama: {$waData['name']}%0A"
+                    . "Ruangan: " . strtoupper($waData['room_type']) . "%0A"
+                    . "Tanggal: {$waData['date']}%0A"
+                    . "Waktu: {$waData['time']}%0A"
+                    . "Detail: {$waData['person_detail']}";
                     @endphp
 
-                    <a href="https://wa.me/{{ $waNumber }}?text={{ $waText }}" target="_blank" class="wa-btn">
-                        👉 Kirim ke WhatsApp
+                    <a href="https://wa.me/{{ $waNumber }}?text={{ $waText }}"
+                        target="_blank" class="wa-btn">
+                        Kirim ke WhatsApp
                     </a>
-                @endif
+                    @endif
+
+                    <button type="button" class="btn btn-sm btn-outline-secondary"
+                        onclick="closeReservationModal('reservation-success-modal')">
+                        Tutup
+                    </button>
+                </div>
             </div>
+        </div>
         @endif
 
+
+
         @if(session('error'))
-            <div class="alert alert-danger mt-4">
-                {{ session('error') }}
+        <div class="reservation-modal-overlay" id="reservation-error-modal">
+            <div class="reservation-modal">
+                <button type="button"
+                    class="reservation-modal-close"
+                    onclick="closeReservationModal('reservation-error-modal')">
+                    ×
+                </button>
+
+                <div class="reservation-modal-header">
+                    <div class="reservation-modal-icon error">!</div>
+                    <div class="reservation-modal-title">
+                        Reservasi Ditolak
+                    </div>
+                </div>
+
+                <div class="reservation-modal-body">
+                    {{ session('error') }}
+                </div>
+
+                <div class="reservation-modal-actions">
+                    <button type="button"
+                        class="btn btn-sm btn-outline-secondary"
+                        onclick="closeReservationModal('reservation-error-modal')">
+                        Oke, saya pilih jam lain
+                    </button>
+                </div>
             </div>
+        </div>
         @endif
+
 
         <div class="section-title text-center mb-5">
             <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Pesan Sekarang</h4>
@@ -217,86 +310,95 @@
         <div class="row justify-content-center">
             <!-- FORM RESERVASI -->
             <div class="col-lg-6">
-<div class="card shadow-sm border-0 reservation-card">
-    <div class="card-body">
+                <div class="card shadow-sm border-0 reservation-card">
+                    <div class="card-body">
                         <h3 class="card-title text-center mb-4">Formulir Reservasi</h3>
 
                         @if ($errors->any())
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <strong>Error!</strong>
-                                <ul class="mb-0">
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Error!</strong>
+                            <ul class="mb-0">
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
                         @endif
 
                         <form id="reservation-form" action="{{ route('reservation.store') }}" method="POST">
                             @csrf
 
-                            <!-- REQUIRED FIELDS WITH STAR -->
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Nama Lengkap <span class="required-star">*</span></label>
-                                <input type="text" name="name" class="form-control form-control-lg" value="{{ old('name') }}" required>
+                            <div class="row g-3">
+                                <div class="col-md-12">
+                                    <label class="form-label fw-semibold">Nama Lengkap <span class="required-star">*</span></label>
+                                    <input type="text" name="name" class="form-control form-control-lg"
+                                        value="{{ old('name') }}" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">Email <span class="required-star">*</span></label>
+                                    <input type="email" name="email" class="form-control form-control-lg"
+                                        value="{{ old('email') }}" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">No. Telepon <span class="required-star">*</span></label>
+                                    <input type="text" name="phone" class="form-control form-control-lg"
+                                        value="{{ old('phone') }}" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">Tipe Ruangan <span class="required-star">*</span></label>
+                                    <select name="room_type" class="form-control form-control-lg" required>
+                                        <option value="">Pilih Ruangan</option>
+                                        <option value="vip" {{ old('room_type') == 'vip' ? 'selected' : '' }}>Ruang VIP</option>
+                                        <option value="workspace" {{ old('room_type') == 'workspace' ? 'selected' : '' }}>Workspace</option>
+                                        <option value="karaoke" {{ old('room_type') == 'karaoke' ? 'selected' : '' }}>Ruang Karaoke</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">Tanggal <span class="required-star">*</span></label>
+                                    <input type="date" name="date" class="form-control form-control-lg"
+                                        value="{{ old('date') }}" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">Jam <span class="required-star">*</span></label>
+                                    <input type="time" name="time" class="form-control form-control-lg"
+                                        value="{{ old('time') }}" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">Durasi (menit) <span class="required-star">*</span></label>
+                                    <input type="number" name="duration" class="form-control form-control-lg"
+                                        min="15" max="1440" value="{{ old('duration', 60) }}" required>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label fw-semibold">Jumlah Orang / Keterangan <span class="required-star">*</span></label>
+                                    <input type="text" name="person_detail" class="form-control form-control-lg"
+                                        value="{{ old('person_detail') }}" required>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" id="agree" required>
+                                        <label class="form-check-label small" for="agree">
+                                            Saya setuju dengan syarat &amp; ketentuan reservasi <span class="required-star">*</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn erth-btn-primary btn-lg w-100">
+                                        <i class="fas fa-check"></i> Pesan Sekarang
+                                    </button>
+                                </div>
                             </div>
-
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Email <span class="required-star">*</span></label>
-                                <input type="email" name="email" class="form-control form-control-lg" value="{{ old('email') }}" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">No. Telepon <span class="required-star">*</span></label>
-                                <input type="text" name="phone" class="form-control form-control-lg" value="{{ old('phone') }}" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Tipe Ruangan <span class="required-star">*</span></label>
-                                <select name="room_type" class="form-control form-control-lg" required>
-                                    <option value="">Pilih Ruangan</option>
-                                    <option value="vip">Ruang VIP</option>
-                                    <option value="workspace">Workspace</option>
-                                    <option value="karaoke">Ruang Karaoke</option>
-                                </select>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Tanggal <span class="required-star">*</span></label>
-                                <input type="date" name="date" class="form-control form-control-lg" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Jam <span class="required-star">*</span></label>
-                                <input type="time" name="time" class="form-control form-control-lg" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Durasi (menit) <span class="required-star">*</span></label>
-                                <input type="number" name="duration" class="form-control" min="15" max="1440" value="{{ old('duration',60) }}" required>
-                            </div>
-
-                            <div class="mb-4">
-                                <label class="form-label fw-semibold">Jumlah Orang / Keterangan <span class="required-star">*</span></label>
-                                <input type="text" name="person_detail" class="form-control form-control-lg" required>
-                            </div>
-
-                            <!-- ============================= -->
-                            <!-- NEW: CHECKBOX WAJIB -->
-                            <!-- ============================= -->
-                            <div class="form-check mb-4">
-                                <input class="form-check-input" type="checkbox" id="agree" required>
-                                <label class="form-check-label" for="agree">
-                                    Saya setuju dengan syarat & ketentuan reservasi <span class="required-star">*</span>
-                                </label>
-                            </div>
-
-                            <button type="submit" class="btn erth-btn-primary btn-lg w-100">
-                                <i class="fas fa-check"></i> Pesan Sekarang
-                            </button>
-
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -313,17 +415,18 @@
             .room-card {
                 border-radius: 18px;
                 overflow: hidden;
-                min-height: 420px; /* PERBESAR KARTU */
+                min-height: 420px;
+                /* PERBESAR KARTU */
                 background-size: cover;
                 background-position: center;
                 position: relative;
-                box-shadow: 0 5px 18px rgba(0,0,0,0.15);
+                box-shadow: 0 5px 18px rgba(0, 0, 0, 0.15);
             }
 
             .room-card-overlay {
                 position: absolute;
                 inset: 0;
-                background: rgba(255,255,255,0.88);
+                background: rgba(255, 255, 255, 0.88);
                 padding: 30px;
                 display: flex;
                 flex-direction: column;
@@ -331,7 +434,8 @@
             }
 
             .room-title {
-                font-size: 32px;         /* PERBESAR JUDUL */
+                font-size: 32px;
+                /* PERBESAR JUDUL */
                 font-weight: 800;
                 color: #1f3c88;
                 margin-bottom: 10px;
@@ -350,6 +454,7 @@
                 list-style: none;
                 padding-left: 0;
             }
+
             .room-features-list li::before {
                 content: "✓ ";
                 color: #1f3c88;
@@ -391,9 +496,9 @@
 
                         <div class="room-actions">
                             @if($booked['vip'])
-                                <button class="btn btn-outline-secondary" disabled>❌ Sudah Dibooking Hari Ini</button>
+                            <button class="btn btn-outline-secondary" disabled>❌ Sudah Dibooking Hari Ini</button>
                             @else
-                                <a href="#reservation-form" class="btn erth-btn-primary">Pesan Ruang VIP</a>
+                            <a href="#reservation-form" class="btn erth-btn-primary">Pesan Ruang VIP</a>
                             @endif
                         </div>
 
@@ -416,13 +521,13 @@
                             <li>Whiteboard & marker</li>
                             <li>Area tenang & nyaman</li>
                             <li>Free Coffee Refill*</li>
-                            </ul>
+                        </ul>
 
                         <div class="room-actions">
                             @if($booked['workspace'])
-                                <button class="btn btn-outline-secondary" disabled>❌ Sudah Dibooking Hari Ini</button>
+                            <button class="btn btn-outline-secondary" disabled>❌ Sudah Dibooking Hari Ini</button>
                             @else
-                                <a href="#reservation-form" class="btn erth-btn-primary">Pesan Workspace</a>
+                            <a href="#reservation-form" class="btn erth-btn-primary">Pesan Workspace</a>
                             @endif
                         </div>
 
@@ -449,9 +554,9 @@
 
                         <div class="room-actions">
                             @if($booked['karaoke'])
-                                <button class="btn btn-outline-secondary" disabled>❌ Sudah Dibooking Hari Ini</button>
+                            <button class="btn btn-outline-secondary" disabled>❌ Sudah Dibooking Hari Ini</button>
                             @else
-                                <a href="#reservation-form" class="btn erth-btn-primary">Pesan Karaoke</a>
+                            <a href="#reservation-form" class="btn erth-btn-primary">Pesan Karaoke</a>
                             @endif
                         </div>
 
@@ -469,55 +574,72 @@
 <!-- MODAL VIP -->
 <!-- ========================= -->
 <div class="modal fade" id="modalVIP" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content modal-custom">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-custom">
 
-      <div class="modal-custom-header">
-        <h5 class="modal-title">Reservasi Ruang VIP</h5>
-      </div>
-
-      <div class="modal-body p-4">
-
-        <form action="{{ route('reservation.store') }}" method="POST">
-            @csrf
-
-            <input type="hidden" name="room_type" value="vip">
-
-            <label>Nama Lengkap <span class="required-star">*</span></label>
-            <input type="text" class="form-control mb-3" name="name" required>
-
-            <label>Email <span class="required-star">*</span></label>
-            <input type="email" class="form-control mb-3" name="email" required>
-
-            <label>No. WhatsApp / Telepon <span class="required-star">*</span></label>
-            <input type="text" class="form-control mb-3" name="phone" required>
-
-            <label>Tanggal <span class="required-star">*</span></label>
-            <input type="date" class="form-control mb-3" name="date" required>
-
-            <label>Waktu <span class="required-star">*</span></label>
-            <input type="time" class="form-control mb-3" name="time" required>
-
-            <label>Jumlah Orang / Catatan <span class="required-star">*</span></label>
-            <textarea class="form-control mb-3" name="person_detail" rows="3" required></textarea>
-
-            <!-- CHECKBOX WAJIB JUGA DI MODAL -->
-            <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" required>
-                <label class="form-check-label">Saya setuju dengan syarat & ketentuan <span class="required-star">*</span></label>
+            <div class="modal-custom-header">
+                <h5 class="modal-title">Reservasi Ruang VIP</h5>
             </div>
 
-            <button type="submit" class="btn erth-btn-primary w-100">
-                Kirim Reservasi VIP
-            </button>
+            <div class="modal-body p-4">
 
-        </form>
+                <form action="{{ route('reservation.store') }}" method="POST">
+                    @csrf
 
-      </div>
+                    <input type="hidden" name="room_type" value="vip">
 
+                    <label>Nama Lengkap <span class="required-star">*</span></label>
+                    <input type="text" class="form-control mb-3" name="name" required>
+
+                    <label>Email <span class="required-star">*</span></label>
+                    <input type="email" class="form-control mb-3" name="email" required>
+
+                    <label>No. WhatsApp / Telepon <span class="required-star">*</span></label>
+                    <input type="text" class="form-control mb-3" name="phone" required>
+
+                    <label>Tanggal <span class="required-star">*</span></label>
+                    <input type="date" class="form-control mb-3" name="date" required>
+
+                    <label>Waktu <span class="required-star">*</span></label>
+                    <input type="time" class="form-control mb-3" name="time" required>
+
+                    <label>Jumlah Orang / Catatan <span class="required-star">*</span></label>
+                    <textarea class="form-control mb-3" name="person_detail" rows="3" required></textarea>
+
+                    <!-- CHECKBOX WAJIB JUGA DI MODAL -->
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" required>
+                        <label class="form-check-label">Saya setuju dengan syarat & ketentuan <span class="required-star">*</span></label>
+                    </div>
+
+                    <button type="submit" class="btn erth-btn-primary w-100">
+                        Kirim Reservasi VIP
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
     </div>
-  </div>
 </div>
+
+<script>
+    function closeReservationModal(id) {
+        const overlay = document.getElementById(id);
+        if (overlay) {
+            overlay.remove();
+        }
+        document.body.style.overflow = ''; // balikin scroll
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const overlay = document.querySelector('.reservation-modal-overlay');
+        if (overlay) {
+            document.body.style.overflow = 'hidden'; // kunci scroll belakang
+        }
+    });
+</script>
 
 
 @endsection
