@@ -1,0 +1,28 @@
+/* Admin dashboard styles - inspired by provided mockup */
+:root{
+  --sidebar-width:260px;
+  --sidebar-bg:#e6e6e6;
+  --accent:#2f4fb2;
+  --card-bg:#dfdfdf;
+}
+body.admin-layout{font-family: 'Montserrat', Arial, sans-serif;background:#fff;color:#111}
+.admin-wrapper{display:flex;min-height:100vh}
+.admin-sidebar{width:var(--sidebar-width);background:var(--sidebar-bg);padding:30px 20px;box-sizing:border-box}
+.admin-logo{font-weight:700;color:var(--accent);margin-bottom:30px}
+.admin-nav{list-style:none;padding:0;margin:10px 0}
+.admin-nav li{margin:14px 0}
+.admin-nav a{display:block;color:#111;text-decoration:none;font-weight:700;padding:10px 18px;border-radius:4px}
+.admin-nav a.active{background:rgba(47,79,178,0.18)}
+.admin-logout{display:block;margin-top:40px;padding:12px;border-radius:28px;background:var(--accent);color:#fff;text-align:center;text-decoration:none;font-weight:700}
+.admin-main{flex:1;padding:40px 60px}
+.admin-header{color:var(--accent);font-weight:700;margin-bottom:30px}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:36px}
+.menu-card{background:var(--card-bg);padding:36px 24px 24px;border-radius:2px;position:relative;overflow:visible}
+.menu-card .circle{width:120px;height:120px;border-radius:50%;background:#dcdcdc;position:absolute;left:50%;transform:translateX(-50%);top:-60px}
+.menu-card h4{margin-top:80px;text-align:center;font-weight:800}
+.menu-card p{font-size:13px;color:#222;line-height:1.3;text-align:center;margin:10px 0}
+.menu-card .price{font-weight:700;text-align:center;margin-bottom:12px}
+.menu-card .actions{display:flex;justify-content:center;gap:20px;font-weight:700}
+.menu-pagination{display:flex;justify-content:center;margin-top:30px}
+.menu-pagination .page-link{margin:0 6px;padding:8px 12px;border-radius:4px;background:#eee;color:#000;text-decoration:none}
+.menu-pagination .page-link.active{background:#ddd;font-weight:800}
