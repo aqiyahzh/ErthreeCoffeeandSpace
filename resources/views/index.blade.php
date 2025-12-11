@@ -651,7 +651,7 @@ Terima kasih.`;
 
         <div class="section-title text-center mb-4">
             <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Testimoni</h4>
-            <h2 class="display-5">Kata-Kata Dari Para Pembeli</h2>
+            <h2 class="display-4">Kata-Kata Dari Para Pembeli</h2>
         </div>
 
         @if(isset($testimonials) && $testimonials->count())
