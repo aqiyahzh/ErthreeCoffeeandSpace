@@ -17,10 +17,10 @@
     </div>
 
     @if(session('success'))
-        <div class="alert alert-success alert-dismissible fade show">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
+    <div class="alert alert-success alert-dismissible fade show">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
     @endif
 
 
@@ -55,14 +55,14 @@
 
                         <td class="text-center">
                             @if($s->image)
-                                <img src="{{ asset('uploads/service/'.$s->image) }}"
-                                    width="70" height="70"
-                                    class="rounded-circle"
-                                    style="object-fit:cover; border:2px solid #2c5aa0;">
+                            <img src="{{ asset('uploads/service/'.$s->image) }}"
+                                width="70" height="70"
+                                class="rounded-circle"
+                                style="object-fit:cover; border:2px solid #2c5aa0;">
                             @else
-                                <div class="img-placeholder">
-                                    <i class="fas fa-image"></i>
-                                </div>
+                            <div class="img-placeholder">
+                                <i class="fas fa-image"></i>
+                            </div>
                             @endif
                         </td>
 
@@ -78,9 +78,9 @@
 
                         <td class="text-center">
                             @if($s->icon)
-                                <i class="{{ $s->icon }}" style="color:#2c5aa0; font-size:1.5rem;"></i>
+                            <i class="{{ $s->icon }}" style="color:#2c5aa0; font-size:1.5rem;"></i>
                             @else
-                                <span class="text-muted">-</span>
+                            <span class="text-muted">-</span>
                             @endif
                         </td>
 
@@ -124,7 +124,7 @@
 <style>
     /* Header Tabel */
 
-            :root {
+    :root {
         --primary-color: #2c5aa0;
         --primary-dark: #224679;
         --primary-light: #e8f0f8;
@@ -132,7 +132,7 @@
         --success-color: #28a745;
     }
 
-        .btn-action {
+    .btn-action {
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -150,65 +150,77 @@
     .btn-edit {
         background-color: var(--primary-color);
         color: white;
+        border: none;
+        padding: .55rem .8rem;
+        /* ⬅️ SAMA DENGAN DELETE */
+        border-radius: 6px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .btn-edit:hover {
         background-color: var(--primary-dark);
     }
-    .table-head{
-        padding:1rem;
-        font-weight:600;
-        color:#2c5aa0;
-        text-align:center;
-        border-bottom:2px solid #d7dfea;
+
+    .table-head {
+        padding: 1rem;
+        font-weight: 600;
+        color: #2c5aa0;
+        text-align: center;
+        border-bottom: 2px solid #d7dfea;
     }
 
     /* Baris */
-    .table-row{
-        height:95px;
-        vertical-align:middle;
-        border-bottom:1px solid #e3e7ef;
+    .table-row {
+        height: 95px;
+        vertical-align: middle;
+        border-bottom: 1px solid #e3e7ef;
     }
-    .table-row:hover{
-        background:#f4f7fc;
+
+    .table-row:hover {
+        background: #f4f7fc;
     }
 
     /* Tombol Tambah */
-    .btn-add{
-        background:#2c5aa0;
-        color:white;
-        padding:.7rem 1.6rem;
-        font-weight:600;
-        border-radius:8px;
-        box-shadow:0 3px 6px rgba(0,0,0,.15);
+    .btn-add {
+        background: #2c5aa0;
+        color: white;
+        padding: .7rem 1.6rem;
+        font-weight: 600;
+        border-radius: 8px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, .15);
     }
-    .btn-add:hover{
-        background:#234b7e;
+
+    .btn-add:hover {
+        background: #234b7e;
     }
 
     /* Tombol Delete */
-    .btn-delete{
-        background:#dc3545;
-        color:white;
-        border:none;
-        padding:.55rem .8rem;
-        border-radius:6px;
+    .btn-delete {
+        background: #dc3545;
+        color: white;
+        border: none;
+        padding: .55rem .8rem;
+        border-radius: 6px;
     }
-    .btn-delete:hover{
-        background:#c82333;
+
+    .btn-delete:hover {
+        background: #c82333;
     }
 
     /* Placeholder Gambar */
-    .img-placeholder{
-        width:70px; height:70px;
-        border-radius:50%;
-        background:#e4eaf2;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        color:#2c5aa0;
-        border:2px solid #2c5aa0;
-        font-size:1.3rem;
+    .img-placeholder {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: #e4eaf2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #2c5aa0;
+        border: 2px solid #2c5aa0;
+        font-size: 1.3rem;
     }
 </style>
 

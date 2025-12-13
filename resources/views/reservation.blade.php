@@ -211,6 +211,20 @@
             transform: translateY(0) scale(1);
         }
     }
+
+    /* Turnstile center & rapi */
+    .turnstile-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 18px 0 6px;
+    }
+
+    .turnstile-wrapper .cf-turnstile {
+        transform: scale(0.95);
+        /* biar proporsional sama input */
+        transform-origin: center;
+    }
 </style>
 
 
@@ -392,6 +406,15 @@
                                 </div>
 
                                 <div class="col-md-12">
+                                    <div class="turnstile-wrapper">
+                                        <div class="cf-turnstile"
+                                            data-sitekey="{{ env('TURNSTILE_SITE_KEY') }}">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-12">
                                     <button type="submit" class="btn erth-btn-primary btn-lg w-100">
                                         <i class="fas fa-check"></i> Pesan Sekarang
                                     </button>
@@ -570,60 +593,6 @@
 </div>
 <!-- Room Selection End -->
 
-<!-- ========================= -->
-<!-- MODAL VIP -->
-<!-- ========================= -->
-<div class="modal fade" id="modalVIP" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content modal-custom">
-
-            <div class="modal-custom-header">
-                <h5 class="modal-title">Reservasi Ruang VIP</h5>
-            </div>
-
-            <div class="modal-body p-4">
-
-                <form action="{{ route('reservation.store') }}" method="POST">
-                    @csrf
-
-                    <input type="hidden" name="room_type" value="vip">
-
-                    <label>Nama Lengkap <span class="required-star">*</span></label>
-                    <input type="text" class="form-control mb-3" name="name" required>
-
-                    <label>Email <span class="required-star">*</span></label>
-                    <input type="email" class="form-control mb-3" name="email" required>
-
-                    <label>No. WhatsApp / Telepon <span class="required-star">*</span></label>
-                    <input type="text" class="form-control mb-3" name="phone" required>
-
-                    <label>Tanggal <span class="required-star">*</span></label>
-                    <input type="date" class="form-control mb-3" name="date" required>
-
-                    <label>Waktu <span class="required-star">*</span></label>
-                    <input type="time" class="form-control mb-3" name="time" required>
-
-                    <label>Jumlah Orang / Catatan <span class="required-star">*</span></label>
-                    <textarea class="form-control mb-3" name="person_detail" rows="3" required></textarea>
-
-                    <!-- CHECKBOX WAJIB JUGA DI MODAL -->
-                    <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" required>
-                        <label class="form-check-label">Saya setuju dengan syarat & ketentuan <span class="required-star">*</span></label>
-                    </div>
-
-                    <button type="submit" class="btn erth-btn-primary w-100">
-                        Kirim Reservasi VIP
-                    </button>
-
-                </form>
-
-            </div>
-
-        </div>
-    </div>
-</div>
-
 <script>
     function closeReservationModal(id) {
         const overlay = document.getElementById(id);
@@ -640,6 +609,7 @@
         }
     });
 </script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
 
 @endsection
