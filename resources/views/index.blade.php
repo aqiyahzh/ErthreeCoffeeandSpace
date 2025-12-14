@@ -122,14 +122,14 @@
                         </div>
                         <div class="col-sm-7">
                             <h4><i class="fa fa-truck service-icon" style="color: #ffffff;"></i>Layanan yang Cepat</h4>
-                            <p class="m-0">Kami menyediakan layanan yang cepat agar pelanggan bisa menikmati kopi dan menu kami dalam kondisi terbaik. Setiap pesanan diproses dengan sigap sehingga sampai tepat waktu dan tetap fresh.</p>
+                            <p class="m-0">Kami menyediakan layanan yang cepat agar pelanggan bisa menikmati kopi dan menu kami dalam kondisi terbaik. Setiap pesanan diproses dengan sigap sehingga sampai tepat waktu.</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 mb-5">
                     <div class="row align-items-center">
                         <div class="col-sm-5">
-                            <img class="img-fluid mb-3 mb-sm-0" src="img/service-2.jpg" alt="">
+                            <img class="img-fluid mb-3 mb-sm-0" src="img/service-2.png" alt="">
                         </div>
 
                         <div class="col-sm-7">
@@ -145,7 +145,7 @@
                         </div>
                         <div class="col-sm-7">
                             <h4><i class="fa fa-award service-icon" style="color: #ffffff;"></i>Kualitas Kopi Terbaik</h4>
-                            <p class="m-0">Setiap minuman yang kami sajikan dibuat dengan perhatian penuh mulai dari pemilihan bahan baku, metode penyeduhan, hingga penyajian. Kami percaya bahwa kualitas adalah kunci untuk memberikan pengalaman terbaik bagi pelanggan.</p>
+                            <p class="m-0">Setiap minuman yang kami sajikan dibuat penuh perhatian mulai dari pemilihan bahan baku, metode penyeduhan, hingga penyajian. Kami percaya bahwa kualitas adalah kunci untuk memberikan pengalaman terbaik.</p>
                         </div>
                     </div>
                 </div>

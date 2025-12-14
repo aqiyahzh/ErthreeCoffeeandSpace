@@ -161,14 +161,14 @@
             <ul class="admin-nav">
                 <li>
                     <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-                        <i class="fas fa-gauge"></i> Dasbor
+                        <i class="fas fa-gauge"></i> Dashboard
                     </a>
                 </li>
 
                 @if(Route::has('admin.carousel.index'))
                 <li>
                     <a href="{{ route('admin.carousel.index') }}" class="{{ request()->routeIs('admin.carousel.*') ? 'active' : '' }}">
-                        <i class="fas fa-images"></i> Korsel
+                        <i class="fas fa-images"></i> Carousel
                     </a>
                 </li>
                 @endif
@@ -208,7 +208,7 @@
                 @if(Route::has('admin.service.index'))
                 <li>
                     <a href="{{ route('admin.service.index') }}" class="{{ request()->routeIs('admin.service.*') ? 'active' : '' }}">
-                        <i class="fas fa-concierge-bell"></i> Layanan
+                        <i class="fas fa-concierge-bell"></i> Servis
                     </a>
                 </li>
                 @endif
@@ -260,7 +260,7 @@
     </div>
 
     @yield('scripts')
-    
+
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
 </body>
