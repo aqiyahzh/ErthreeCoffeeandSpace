@@ -49,7 +49,7 @@
                 <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
                     <img class="w-100" src="{{ asset('uploads/carousel/'.$carousel->image) }}" alt="{{ $carousel->title }}">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                        <h2 class="text-white font-weight-medium m-0 caption-badge">Kami Melayani</h2>
+                        <!-- <h2 class="text-white font-weight-medium m-0 caption-badge">Kami Melayani</h2> -->
                         <h2 class="display-2 text-white m-0">{{ $carousel->title }}</h2>
                         <h2 class="text-white m-0">SEJAK 2023</h2>
                     </div>
