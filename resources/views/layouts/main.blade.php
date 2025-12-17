@@ -18,30 +18,28 @@
 
     <!-- Libraries Stylesheet -->
     <link href="{{ asset('lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet" />
 
     <!-- Main CSS -->
     <link href="{{ asset('css/style.min.css') }}" rel="stylesheet">
 
+    {{-- CSS khusus halaman (kalau perlu) --}}
     @stack('styles')
 </head>
 
 <body>
-    {{-- Navbar --}}
     @include('partials.navbar')
 
-    {{-- Page Content --}}
     @yield('content')
 
-    {{-- Footer --}}
     @include('partials.footer')
 
-    <!-- Back to Top -->
+    <!-- Back to Top (cukup di layout, jangan di page lagi) -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top">
         <i class="fa fa-angle-double-up"></i>
     </a>
 
-    <!-- JavaScript Libraries -->
+    <!-- JS global -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 
@@ -53,13 +51,12 @@
     <script src="{{ asset('lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
     <script src="{{ asset('lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 
-    <!-- Contact Javascript File -->
     <script src="{{ asset('mail/jqBootstrapValidation.min.js') }}"></script>
     <script src="{{ asset('mail/contact.js') }}"></script>
 
-    <!-- Template Javascript -->
     <script src="{{ asset('js/main.js') }}"></script>
 
+    {{-- JS khusus halaman --}}
     @stack('scripts')
 </body>
 </html>

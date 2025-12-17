@@ -1,5 +1,7 @@
 @extends('layouts.main')
 
+@section('content')
+
 @push('styles')
 <style>
     /* ================= FORM ================= */
@@ -43,7 +45,6 @@
     .btn-submit:hover {
         background: linear-gradient(135deg, #234a88, #3a6bb5);
     }
-
     .turnstile-wrapper {
         display: flex;
         justify-content: center;
@@ -74,14 +75,8 @@
         border: 3px solid #2c5aa0;
         flex-shrink: 0;
     }
-    .testimonial-name {
-        font-weight: 700;
-        color: #1f3c88;
-    }
-    .testimonial-date {
-        font-size: .85rem;
-        color: #8a8a8a;
-    }
+    .testimonial-name { font-weight: 700; color: #1f3c88; }
+    .testimonial-date { font-size: .85rem; color: #8a8a8a; }
     .testimonial-stars { color: #fbc02d; }
 
     .testimonial-content {
@@ -97,8 +92,6 @@
     }
 </style>
 @endpush
-
-@section('content')
 
 <!-- PAGE HEADER -->
 <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
@@ -157,29 +150,28 @@
     </div>
 </div>
 
-<!-- LIST TESTIMONIAL -->
+<!-- TESTIMONIAL LIST -->
 <div class="container-fluid py-5 bg-light">
     <div class="container">
-        <div class="section-title text-center mb-4">
-            <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Testimoni</h4>
-            <h2 class="display-4">Kata-Kata Dari Para Pembeli</h2>
+
+        <div class="text-center mb-4">
+            <h2 class="display-5">Kata-Kata Dari Para Pembeli</h2>
         </div>
 
         @if(isset($testimonials) && $testimonials->count())
-            <div class="row g-4">
+            <div class="row">
                 @foreach($testimonials as $t)
                     <div class="col-12 col-md-6 col-lg-4 mb-4">
                         <div class="testimonial-card">
                             <div class="testimonial-header">
                                 <img class="testimonial-user-img"
-                                     src="{{ $t->photo ? asset('uploads/testimonial/'.$t->photo) : asset('img/testimonial-1.png') }}"
-                                     alt="User">
+                                     src="{{ $t->photo ? asset('uploads/testimonial/'.$t->photo) : asset('img/testimonial-1.png') }}">
 
                                 <div>
                                     <div class="testimonial-name">{{ $t->name ?? 'Anonymous' }}</div>
-                                    <div class="testimonial-date">{{ optional($t->created_at)->format('d M Y') }}</div>
+                                    <div class="testimonial-date">{{ $t->created_at->format('d M Y') }}</div>
                                     <div class="testimonial-stars">
-                                        @for($i=0;$i<($t->rating ?? 0);$i++) ⭐ @endfor
+                                        @for($i=0; $i<$t->rating; $i++) ⭐ @endfor
                                     </div>
                                 </div>
                             </div>
@@ -190,15 +182,14 @@
                 @endforeach
             </div>
         @else
-            <div class="p-4 text-center" style="border-radius:14px;background:#fff;">
-                <p class="m-0 text-muted">Belum ada testimonial.</p>
-            </div>
+            <p class="text-center text-muted">Belum ada testimonial.</p>
         @endif
+
     </div>
 </div>
-
-@endsection
 
 @push('scripts')
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 @endpush
+
+@endsection
