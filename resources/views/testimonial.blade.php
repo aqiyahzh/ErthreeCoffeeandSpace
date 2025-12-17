@@ -2,281 +2,192 @@
 
 @section('content')
 
-<!DOCTYPE html>
-<html lang="en">
+<style>
+  /* ================= FORM ================= */
+  .form-wrapper {
+      background: #e0e1e2ff;
+      border-radius: 18px;
+      padding: 28px 32px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, .12);
+      border: 1px solid #e5ebff;
+  }
+  .form-title {
+      font-size: 24px;
+      font-weight: 700;
+      text-align: center;
+      color: #1f3c88;
+      margin-bottom: 18px;
+  }
+  .form-label {
+      font-size: .9rem;
+      font-weight: 600;
+      color: #1f3c88;
+      margin-bottom: 4px;
+  }
+  .form-control {
+      border-radius: 12px;
+      padding: 10px 14px;
+      border: 1px solid #cdd8f7;
+      font-size: .95rem;
+  }
+  textarea.form-control { min-height: 110px; }
 
-<head>
-    <meta charset="utf-8">
-    <title>ERTHREE Coffee and Space</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  .btn-submit {
+      height: 55px;
+      background: linear-gradient(135deg, #2c5aa0, #4a7bc8);
+      border: none;
+      border-radius: 14px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: white;
+  }
+  .btn-submit:hover {
+      background: linear-gradient(135deg, #234a88, #3a6bb5);
+  }
 
-    <!-- Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  .turnstile-wrapper {
+      display: flex;
+      justify-content: center;
+      margin: 14px 0 6px;
+  }
 
-    <!-- Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  /* ================= TESTIMONIAL CARD ================= */
+  .testimonial-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, .08);
+      border: 1px solid #e7eaff;
+      height: 320px;
+      display: flex;
+      flex-direction: column;
+  }
 
-    <!-- Owl Carousel -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+  .testimonial-header {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 12px;
+  }
 
-    <!-- Main Style -->
-    <link href="css/style.min.css" rel="stylesheet">
+  .testimonial-user-img {
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #2c5aa0;
+  }
 
-    <style>
-        /* ================= FORM ================= */
-        .form-wrapper {
-            background: #e0e1e2ff;
-            border-radius: 18px;
-            padding: 28px 32px;
-            box-shadow: 0 10px 28px rgba(0, 0, 0, .12);
-            border: 1px solid #e5ebff;
-        }
+  .testimonial-name { font-weight: 700; color: #1f3c88; }
+  .testimonial-date { font-size: .85rem; color: #8a8a8a; }
+  .testimonial-stars { color: #fbc02d; }
 
-        .form-title {
-            font-size: 24px;
-            font-weight: 700;
-            text-align: center;
-            color: #1f3c88;
-            margin-bottom: 18px;
-        }
+  .testimonial-content {
+      font-size: .95rem;
+      color: #333;
+      line-height: 1.55;
+      margin-top: 10px;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      line-clamp: 4;
+  }
+</style>
 
-        .form-label {
-            font-size: .9rem;
-            font-weight: 600;
-            color: #1f3c88;
-            margin-bottom: 4px;
-        }
+<!-- PAGE HEADER -->
+<div class="container-fluid page-header mb-5 position-relative overlay-bottom">
+  <div class="d-flex align-items-center justify-content-center" style="min-height:400px;">
+    <h1 class="display-4 text-white text-uppercase">Testimoni</h1>
+  </div>
+</div>
 
-        .form-control {
-            border-radius: 12px;
-            padding: 10px 14px;
-            border: 1px solid #cdd8f7;
-            font-size: .95rem;
-        }
+<!-- FORM TESTIMONIAL -->
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-7">
+      <div class="form-wrapper">
+        <h3 class="form-title">Form Testimonial</h3>
 
-        textarea.form-control {
-            min-height: 110px;
-        }
+        <form action="{{ route('testimonial.store') }}" method="POST">
+          @csrf
 
-        .btn-submit {
-            height: 55px;
-            background: linear-gradient(135deg, #2c5aa0, #4a7bc8);
-            border: none;
-            border-radius: 14px;
-            font-size: 1.05rem;
-            font-weight: 600;
-            color: white;
-        }
+          <div class="mb-3">
+            <label class="form-label">Nama *</label>
+            <input type="text" name="name" class="form-control" required>
+          </div>
 
-        .btn-submit:hover {
-            background: linear-gradient(135deg, #234a88, #3a6bb5);
-        }
+          <div class="mb-3">
+            <label class="form-label">Email *</label>
+            <input type="email" name="email" class="form-control" required>
+          </div>
 
-        .turnstile-wrapper {
-            display: flex;
-            justify-content: center;
-            margin: 14px 0 6px;
-        }
+          <div class="mb-3">
+            <label class="form-label">Rating *</label>
+            <select name="rating" class="form-control" required>
+              <option value="">Pilih Rating</option>
+              <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+              <option value="4">⭐⭐⭐⭐ (4)</option>
+              <option value="3">⭐⭐⭐ (3)</option>
+              <option value="2">⭐⭐ (2)</option>
+              <option value="1">⭐ (1)</option>
+            </select>
+          </div>
 
-        /* ================= TESTIMONIAL CARD ================= */
-        .testimonial-card {
-            background: #fff;
-            border-radius: 16px;
-            padding: 22px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, .08);
-            border: 1px solid #e7eaff;
+          <div class="mb-3">
+            <label class="form-label">Testimonial *</label>
+            <textarea name="testimonial" class="form-control" required></textarea>
+          </div>
 
-            /* INI KUNCI UTAMA */
-            height: 320px;
-            /* tinggi konsisten */
-            display: flex;
-            flex-direction: column;
-        }
+          <div class="turnstile-wrapper">
+            <div class="cf-turnstile" data-sitekey="{{ env('TURNSTILE_SITE_KEY') }}"></div>
+          </div>
 
-        .testimonial-header {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 12px;
-        }
+          <button type="submit" class="btn-submit w-100 mt-2">
+            Kirim Testimonial
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
-        .testimonial-user-img {
-            width: 62px;
-            height: 62px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #2c5aa0;
-        }
+<!-- TESTIMONIAL SLIDER -->
+<div class="container-fluid py-5 bg-light">
+  <div class="container">
 
-        .testimonial-name {
-            font-weight: 700;
-            color: #1f3c88;
-        }
-
-        .testimonial-date {
-            font-size: .85rem;
-            color: #8a8a8a;
-        }
-
-        .testimonial-stars {
-            color: #fbc02d;
-        }
-
-        .testimonial-content {
-            font-size: .95rem;
-            color: #333;
-            line-height: 1.55;
-
-            margin-top: 10px;
-
-            /* BIAR PANJANG TEKS TIDAK MERUSAK CARD */
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-line-clamp: 4;
-            /* maksimal 4 baris */
-            -webkit-box-orient: vertical;
-            line-clamp: 4;
-        }
-    </style>
-</head>
-
-<body>
-
-    <!-- PAGE HEADER -->
-    <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
-        <div class="d-flex align-items-center justify-content-center" style="min-height:400px;">
-            <h1 class="display-4 text-white text-uppercase">Testimoni</h1>
-        </div>
+    <div class="text-center mb-4">
+      <h2 class="display-5">Kata-Kata Dari Para Pembeli</h2>
     </div>
 
-    <!-- FORM TESTIMONIAL -->
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-7">
-                <div class="form-wrapper">
-                    <h3 class="form-title">Form Testimonial</h3>
+    @if(isset($testimonials) && $testimonials->count())
+      <div class="owl-carousel testimonial-carousel">
+        @foreach($testimonials as $t)
+          <div class="testimonial-card">
+            <div class="testimonial-header">
+              <img class="testimonial-user-img"
+                   src="{{ $t->photo ? asset('uploads/testimonial/'.$t->photo) : asset('img/testimonial-1.png') }}"
+                   alt="foto">
 
-                    <form action="{{ route('testimonial.store') }}" method="POST">
-                        @csrf
-
-                        <div class="mb-3">
-                            <label class="form-label">Nama *</label>
-                            <input type="text" name="name" class="form-control" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Email *</label>
-                            <input type="email" name="email" class="form-control" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Rating *</label>
-                            <select name="rating" class="form-control" required>
-                                <option value="">Pilih Rating</option>
-                                <option value="5">⭐⭐⭐⭐⭐ (5)</option>
-                                <option value="4">⭐⭐⭐⭐ (4)</option>
-                                <option value="3">⭐⭐⭐ (3)</option>
-                                <option value="2">⭐⭐ (2)</option>
-                                <option value="1">⭐ (1)</option>
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Testimonial *</label>
-                            <textarea name="testimonial" class="form-control" required></textarea>
-                        </div>
-
-                        <div class="turnstile-wrapper">
-                            <div class="cf-turnstile"
-                                data-sitekey="{{ env('TURNSTILE_SITE_KEY') }}">
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn-submit w-100 mt-2">
-                            Kirim Testimonial
-                        </button>
-                    </form>
+              <div>
+                <div class="testimonial-name">{{ $t->name ?? 'Anonymous' }}</div>
+                <div class="testimonial-date">{{ $t->created_at->format('d M Y') }}</div>
+                <div class="testimonial-stars">
+                  @for($i=0;$i<$t->rating;$i++) ⭐ @endfor
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- TESTIMONIAL SLIDER -->
-    <div class="container-fluid py-5 bg-light">
-        <div class="container">
-
-            <div class="text-center mb-4">
-                <h2 class="display-5">Kata-Kata Dari Para Pembeli</h2>
+              </div>
             </div>
 
-            @if(isset($testimonials) && $testimonials->count())
+            <p class="testimonial-content">{{ $t->content }}</p>
+          </div>
+        @endforeach
+      </div>
+    @else
+      <p class="text-center text-muted">Belum ada testimonial.</p>
+    @endif
 
-            <div class="owl-carousel testimonial-carousel">
+  </div>
+</div>
 
-                @foreach($testimonials as $t)
-                <div class="testimonial-card">
-
-                    <div class="testimonial-header">
-                        <img class="testimonial-user-img"
-                            src="{{ $t->photo ? '/uploads/testimonial/'.$t->photo : 'img/testimonial-1.png' }}">
-
-                        <div>
-                            <div class="testimonial-name">{{ $t->name ?? 'Anonymous' }}</div>
-                            <div class="testimonial-date">{{ $t->created_at->format('d M Y') }}</div>
-                            <div class="testimonial-stars">
-                                @for($i=0;$i<$t->rating;$i++) ⭐ @endfor
-                            </div>
-                        </div>
-                    </div>
-
-                    <p class="testimonial-content">{{ $t->content }}</p>
-
-                </div>
-                @endforeach
-
-            </div>
-
-            @else
-            <p class="text-center text-muted">Belum ada testimonial.</p>
-            @endif
-
-        </div>
-    </div>
-
-    <!-- BACK TO TOP -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top">
-        <i class="fa fa-angle-double-up"></i>
-    </a>
-
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-
-    <script>
-        $(document).ready(function() {
-            $('.testimonial-carousel').owlCarousel({
-                autoplay: true,
-                smartSpeed: 900,
-                margin: 25,
-                dots: true,
-                nav: false,
-                loop: true,
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    768: {
-                        items: 2
-                    },
-                    992: {
-                        items: 3
-                    }
-                }
-            });
-        });
-    </script>
-
-</body>
-
-</html>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
 @endsection
