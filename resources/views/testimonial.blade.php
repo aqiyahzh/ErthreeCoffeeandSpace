@@ -1,7 +1,5 @@
 @extends('layouts.main')
 
-@section('title', 'Testimoni - ERTHREE Coffee and Space')
-
 @push('styles')
 <style>
     /* ================= FORM ================= */
@@ -64,6 +62,7 @@
         padding: 22px;
         box-shadow: 0 8px 20px rgba(0, 0, 0, .08);
         border: 1px solid #e7eaff;
+
         height: 320px;
         display: flex;
         flex-direction: column;
@@ -92,12 +91,17 @@
         color: #333;
         line-height: 1.55;
         margin-top: 10px;
+
         overflow: hidden;
         display: -webkit-box;
         -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
         line-clamp: 4;
     }
+
+    /* Biar card nggak kepotong saat carousel */
+    .owl-carousel .owl-stage-outer { overflow: visible; }
+    .owl-carousel .owl-item { padding: 15px; }
 </style>
 @endpush
 
@@ -151,7 +155,9 @@
                         <div class="cf-turnstile" data-sitekey="{{ env('TURNSTILE_SITE_KEY') }}"></div>
                     </div>
 
-                    <button type="submit" class="btn-submit w-100 mt-2">Kirim Testimonial</button>
+                    <button type="submit" class="btn-submit w-100 mt-2">
+                        Kirim Testimonial
+                    </button>
                 </form>
             </div>
         </div>
@@ -161,6 +167,7 @@
 <!-- TESTIMONIAL SLIDER -->
 <div class="container-fluid py-5 bg-light">
     <div class="container">
+
         <div class="text-center mb-4">
             <h2 class="display-5">Kata-Kata Dari Para Pembeli</h2>
         </div>
@@ -189,6 +196,7 @@
         @else
             <p class="text-center text-muted">Belum ada testimonial.</p>
         @endif
+
     </div>
 </div>
 
@@ -196,9 +204,8 @@
 
 @push('scripts')
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-
 <script>
-    $(function () {
+    $(document).ready(function() {
         $('.testimonial-carousel').owlCarousel({
             autoplay: true,
             smartSpeed: 900,
